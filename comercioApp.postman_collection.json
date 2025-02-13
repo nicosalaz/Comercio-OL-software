@@ -115,10 +115,82 @@
 					"response": []
 				},
 				{
-					"name": "New Request",
+					"name": "eliminar",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/comerciantes/eliminar/19",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"comerciantes",
+								"eliminar",
+								"19"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAll",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/comerciantes/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"comerciantes",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getById",
 					"request": {
 						"method": "GET",
-						"header": []
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/comerciantes/10",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"comerciantes",
+								"10"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "exportar",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/comerciantes/exportar",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"comerciantes",
+								"exportar"
+							]
+						}
 					},
 					"response": []
 				}
@@ -142,7 +214,8 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/auth/",
+							"raw": "http://localhost:8080/auth/",
+							"protocol": "http",
 							"host": [
 								"localhost"
 							],
