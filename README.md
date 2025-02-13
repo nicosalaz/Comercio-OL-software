@@ -6,3 +6,4 @@ Es un proyecto de software creado para el control de comerciantes y sus establec
 * Maven 3.9.9
 * Node 18.20.6
 * Npm 10.8.2
+* Angular CLI 19.1.6
