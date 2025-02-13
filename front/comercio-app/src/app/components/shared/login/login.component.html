@@ -1,0 +1,56 @@
+<div
+  class="container-fluid h-100 w-100 d-flex justify-content-center align-items-center"
+  id="login"
+>
+  <div class="card w-50 h-75">
+    <div class="card-header text-center">
+      Digita tu correo electrónico y su clave
+    </div>
+    <div
+      class="card-body d-flex flex-column justify-content-evenly align-items-center"
+    >
+      <form
+        [formGroup]="formLogin"
+        (ngSubmit)="autenticar()"
+        class="w-100 h-100 d-flex flex-column justify-content-evenly align-items-center"
+      >
+        <label for="correo" class="form-label">Correo electrónico</label>
+        <input
+          type="email"
+          class="form-control w-75"
+          name="correo"
+          id="correo"
+          formControlName="correo"
+          required
+        />
+        <label for="clave" class="form-label">Clave</label>
+        <input
+          type="password"
+          class="form-control w-75"
+          name="clave"
+          id="clave"
+          formControlName="clave"
+          required
+        />
+        <div class="row">
+          <div class="col">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              value=""
+              id="condiciones"
+              name="condiciones"
+              formControlName="condiciones"
+            />
+            <label class="form-check-label" for="condiciones">
+              Acepta términos y condiciones
+            </label>
+          </div>
+        </div>
+        <button class="btn btn-primary w-75" type="submit">
+          Iniciar Sesión
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

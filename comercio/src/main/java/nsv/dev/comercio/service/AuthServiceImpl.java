@@ -19,14 +19,21 @@ public class AuthServiceImpl implements AuthService {
 	private JwtService jwtService;
 	@Autowired
 	private AuthenticationManager authenticationManager;
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+
 	@Override
 	public AuthResponseDto login(LoginDto loginDto) {
-		AuthResponseDto authResponseDto =  new AuthResponseDto();
+		AuthResponseDto authResponseDto = new AuthResponseDto();
+		System.out.println(passwordEncoder.matches(loginDto.getClave(),
+				"$2a$10$.xxBTt9mokCJFWx3rk7on.FUTq4kwwm868p5EKngDmzDlF8EqgD82"));
 		try {
-			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginDto.getCorreo(), loginDto.getClave()));
+			authenticationManager
+					.authenticate(new UsernamePasswordAuthenticationToken(loginDto.getCorreo(), loginDto.getClave()));
 			Usuario usuario = usuarioRepository.findByCorreoElectronico(loginDto.getCorreo());
 			String token = jwtService.getToken(usuario);
 			authResponseDto.setToken(token);
+			authResponseDto.setUsuario(usuario);
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		}

@@ -184,7 +184,8 @@ order by 7 desc;
 CREATE OR REPLACE FUNCTION obtener_comerciantes_activos
 RETURN SYS_REFCURSOR
 IS
-    comerciantes_cursor SYS_REFCURSOR;
+    type ref_cursor is ref cursor;
+    comerciantes_cursor ref_cursor;
 BEGIN
     OPEN comerciantes_cursor FOR
     select c.nombre,m.nombre_municipio,c.telefono,c.correo_electronico,c.fecha_registro,c.estado,count(e.establecimiento_id) as cantidad_establecimientos, sum(e.ingresos) as ingresos_totales, sum(e.cantidad_empleados) as cantidad_empleados 
@@ -195,3 +196,27 @@ BEGIN
 
     RETURN comerciantes_cursor;
 END obtener_comerciantes_activos;
+/
+set serveroutput on;
+declare
+    comerciantes_cursor SYS_REFCURSOR;
+    nombre comerciantes.nombre%TYPE;
+    nombre_municipio municipios.nombre_municipio%TYPE;
+    telefono comerciantes.telefono%TYPE;
+    correo_electronico comerciantes.correo_electronico%TYPE;
+    fecha_registro comerciantes.fecha_registro%TYPE;
+    estado comerciantes.estado%TYPE;
+    cantidad_establecimientos establecimientos.establecimiento_id%TYPE;
+    ingresos_totales establecimientos.ingresos%TYPE;
+    cantidad_empleados establecimientos.cantidad_empleados%TYPE;
+begin
+    comerciantes_cursor := obtener_comerciantes_activos;
+    loop
+    fetch comerciantes_cursor into nombre,nombre_municipio,telefono,
+    correo_electronico,fecha_registro,estado,cantidad_establecimientos,
+    ingresos_totales,cantidad_empleados;
+     EXIT WHEN comerciantes_cursor%NOTFOUND;
+         DBMS_OUTPUT.PUT_LINE(nombre);
+    end loop;
+end;
+/

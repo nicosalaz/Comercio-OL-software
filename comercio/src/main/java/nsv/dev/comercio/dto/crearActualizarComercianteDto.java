@@ -21,7 +21,7 @@ public class crearActualizarComercianteDto {
 	private Long municipioId;
 	@NotNull(message = "el usuario es obligatorio")
 	@Min(value = 1, message = "usuario no encontrado")
-	private int usuarioModifica;
+	private Long usuarioModifica;
 	@NotNull(message = "el estado es obligatorio")
 	@Min(value = 0, message = "estado puede ser 1 o 0")
 	@Max(value = 1, message = "estado puede ser 1 o 0")
@@ -67,13 +67,12 @@ public class crearActualizarComercianteDto {
 		this.estado = estado;
 	}
 
-	public int getUsuarioModifica() {
+	public Long getUsuarioModifica() {
 		return usuarioModifica;
 	}
 
-	public void setUsuarioModifica(int usuarioModifica) {
+	public void setUsuarioModifica(Long usuarioModifica) {
 		this.usuarioModifica = usuarioModifica;
 	}
-	
 
 }

@@ -1,8 +1,9 @@
 package nsv.dev.comercio.service;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import jakarta.persistence.EntityManager;
@@ -12,6 +13,7 @@ import nsv.dev.comercio.model.Comerciante;
 import nsv.dev.comercio.model.Municipio;
 import nsv.dev.comercio.persistence.ComercianteRepository;
 import nsv.dev.comercio.persistence.MunicipioRepository;
+import nsv.dev.comercio.persistence.ObtenerComerciantesActivosRepository;
 
 @Service
 public class ComercianteServiceImpl implements ComercianteService {
@@ -21,10 +23,19 @@ public class ComercianteServiceImpl implements ComercianteService {
 	private MunicipioRepository municipioRepository;
 	@Autowired
 	private EntityManager entityManager;
+	@Autowired
+	private ObtenerComerciantesActivosRepository obtenerComerciantesActivosRepository;
 
 	@Override
-	public List<Comerciante> getAll() {
-		return (List<Comerciante>) comercianteRepository.findAll();
+	public Page<Comerciante> getAll(Integer page, Integer size) {
+		try {
+			Pageable pageable = PageRequest.of(page, size);
+			Page<Comerciante> pageResult = comercianteRepository.findAll(pageable);
+			return pageResult;
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
+		return null;
 	}
 
 	@Override
@@ -88,6 +99,29 @@ public class ComercianteServiceImpl implements ComercianteService {
 			System.err.println(e.getMessage());
 		}
 		return false;
+	}
+
+	@Override
+	public Comerciante getByComercianteId(Long comercianteId) {
+		Comerciante comerciante = null;
+		try {
+			comerciante = comercianteRepository.findByComercianteId(comercianteId);
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
+		return comerciante;
+	}
+
+	@Override
+	public String exportarComerciantesCsv() {
+		try {
+			String filePath = "C:/Users/Nicosalaz/Downloads/comerciantes.csv";
+			boolean comercianteCsvDto = obtenerComerciantesActivosRepository.exportarComerciantesCSV(filePath);
+			return "Archivo CSV generado";
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
+		return "Algo salió mal";
 	}
 
 }

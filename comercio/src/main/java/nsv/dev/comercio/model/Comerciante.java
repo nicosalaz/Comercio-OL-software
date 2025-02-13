@@ -31,7 +31,7 @@ public class Comerciante {
 	@Column(name = "fecha_actualizacion", nullable = true)
 	private Date fechaActualizacion;
 	@Column(name = "usuario_modifica", nullable = true)
-	private int usuarioModifica;
+	private Long usuarioModifica;
 
 	public Comerciante() {
 	}
@@ -119,11 +119,11 @@ public class Comerciante {
 		this.fechaActualizacion = fechaActualizacion;
 	}
 
-	public int getUsuarioModifica() {
+	public Long getUsuarioModifica() {
 		return usuarioModifica;
 	}
 
-	public void setUsuarioModifica(int usuarioModifica) {
+	public void setUsuarioModifica(Long usuarioModifica) {
 		this.usuarioModifica = usuarioModifica;
 	}
 
